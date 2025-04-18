@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+set_time_limit(1);
+
 use App\SortedLinkedList;
 use PHPUnit\Framework\TestCase;
 
@@ -27,6 +29,15 @@ class SortedLinkedListTest extends TestCase
         $list->remove(5);
 
         $this->assertEquals([4, 6], $list->toArray());
+    }
+
+    public function testRemoveDifferentDataType(): void
+    {
+        $list = new SortedLinkedList();
+        $list->add('train');
+        $list->add('car');
+
+        $list->remove(5);
     }
 
     public function testListNodesCount(): void
