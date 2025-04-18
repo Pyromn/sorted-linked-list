@@ -41,6 +41,10 @@ class SortedLinkedList
 
     public function remove(int|string $value): bool
     {
+        if (! $this->contains($value)) {
+            return false;
+        }
+
         $firstNode = $this->getFirstNode();
 
         if ($firstNode === null) {
@@ -73,6 +77,10 @@ class SortedLinkedList
 
     public function contains(int|string $value): bool
     {
+        if ($this->getDataType() !== gettype($value)) {
+            return false;
+        }
+
         $current = $this->getFirstNode();
 
         while ($current !== null) {
@@ -102,7 +110,7 @@ class SortedLinkedList
     public function clearList(): void
     {
         $this->setFirstNode();
-        $this->setType();
+        $this->setDataType();
     }
 
     public function toArray(): array
@@ -143,7 +151,7 @@ class SortedLinkedList
         $inputType = gettype($value);
 
         if ($listDataType === null) {
-            $this->setType($inputType);
+            $this->setDataType($inputType);
         } elseif ($listDataType !== $inputType) {
             throw new InvalidArgumentException('All values must have the same $listDataType type.');
         }
@@ -164,7 +172,7 @@ class SortedLinkedList
         return $this->dataType;
     }
 
-    private function setType(?string $type = null): void
+    private function setDataType(?string $type = null): void
     {
         $this->dataType = $type;
     }

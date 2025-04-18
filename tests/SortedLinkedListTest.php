@@ -26,7 +26,8 @@ class SortedLinkedListTest extends TestCase
         $list->add(4);
         $list->add(6);
 
-        $list->remove(5);
+        $this->assertTrue($list->remove(5));
+        $this->assertFalse($list->remove(11));
 
         $this->assertEquals([4, 6], $list->toArray());
     }
@@ -37,7 +38,8 @@ class SortedLinkedListTest extends TestCase
         $list->add('train');
         $list->add('car');
 
-        $list->remove(5);
+        $this->assertTrue($list->remove('car'));
+        $this->assertFalse($list->remove(5));
     }
 
     public function testListNodesCount(): void
@@ -57,7 +59,6 @@ class SortedLinkedListTest extends TestCase
         $list->add('vehicle');
 
         $this->assertTrue($list->contains('bike'));
-
         $this->assertFalse($list->contains('jet'));
     }
 
